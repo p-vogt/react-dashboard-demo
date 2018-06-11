@@ -1,1 +1,1 @@
-# react-dashboard
+# React Dashboard Demo
