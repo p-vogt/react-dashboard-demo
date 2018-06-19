@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 class Room2Page extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>

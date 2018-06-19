@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 class Room1Page extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>
