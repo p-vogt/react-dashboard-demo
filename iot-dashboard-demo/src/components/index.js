@@ -1,1 +1,1 @@
-export { default as TemperatureLineChart } from './SensorLineChart/SensorLineChart';
+export { default as TemperatureLineChart } from './TemperatureLineChart/TemperatureLineChart';
