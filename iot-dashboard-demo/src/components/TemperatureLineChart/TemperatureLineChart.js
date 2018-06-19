@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import openSocket from 'socket.io-client';
 import Paper from '@material-ui/core/Paper';
+import FormLabel from '@material-ui/core/FormLabel';
 
 class TemperatureLineChart extends Component {
 
@@ -17,34 +18,34 @@ class TemperatureLineChart extends Component {
         });
 
         let data = [
-            { name: 'Page A', Room1: 30, Room2: 25 },
-            { name: 'Page A', Room1: 31, Room2: 25 },
-            { name: 'Page A', Room1: 32, Room2: 25 },
-            { name: 'Page A', Room1: 33, Room2: 25 },
-            { name: 'Page A', Room1: 29, Room2: 25 },
-            { name: 'Page A', Room1: 28, Room2: 25 },
-            { name: 'Page A', Room1: 31, Room2: 25 },
-            { name: 'Page A', Room1: 33, Room2: 25 },
-            { name: 'Page A', Room1: 30, Room2: 25 },
-            { name: 'Page A', Room1: 35, Room2: 25 },
-            { name: 'Page A', Room1: 30, Room2: 25 },
-            { name: 'Page A', Room1: 34, Room2: 25 },
-            { name: 'Page A', Room1: 35, Room2: 25 },
-            { name: 'Page A', Room1: 32, Room2: 25 },
-            { name: 'Page A', Room1: 28, Room2: 25 },
-            { name: 'Page A', Room1: 27, Room2: 25 },
-            { name: 'Page A', Room1: 26, Room2: 25 },
-            { name: 'Page A', Room1: 25, Room2: 25 },
-            { name: 'Page A', Room1: 29, Room2: 25 },
-            { name: 'Page A', Room1: 30, Room2: 25 },
-            { name: 'Page A', Room1: 29, Room2: 25 },
-            { name: 'Page A', Room1: 35, Room2: 25 },
-            { name: 'Page A', Room1: 34, Room2: 25 },
-            { name: 'Page A', Room1: 31, Room2: 25 },
-            { name: 'Page A', Room1: 32, Room2: 25 },
-            { name: 'Page A', Room1: 33, Room2: 25 },
-            { name: 'Page A', Room1: 30, Room2: 25 },
-            { name: 'Page A', Room1: 28, Room2: 25 },
+            { name: 'xxx', Room1: 30, Room2: 25 },
+            { name: 'xxx', Room1: 31, Room2: 25 },
+            { name: 'xxx', Room1: 32, Room2: 25 },
+            { name: 'xxx', Room1: 33, Room2: 25 },
+            { name: 'xxx', Room1: 29, Room2: 25 },
+            { name: 'xxx', Room1: 28, Room2: 25 },
+            { name: 'xxx', Room1: 31, Room2: 25 },
+            { name: 'xxx', Room1: 33, Room2: 25 },
+            { name: 'xxx', Room1: 30, Room2: 25 },
+            { name: 'xxx', Room1: 35, Room2: 25 },
+            { name: 'xxx', Room1: 30, Room2: 25 },
+            { name: 'xxx', Room1: 34, Room2: 25 },
+            { name: 'xxx', Room1: 35, Room2: 25 },
+            { name: 'xxx', Room1: 32, Room2: 25 },
+            { name: 'xxx', Room1: 28, Room2: 25 },
+            { name: 'xxx', Room1: 27, Room2: 25 },
+            { name: 'xxx', Room1: 26, Room2: 25 },
+            { name: 'xxx', Room1: 25, Room2: 25 },
+            { name: 'xxx', Room1: 29, Room2: 25 },
+            { name: 'xxx', Room1: 30, Room2: 25 },
+            { name: 'xxx', Room1: 29, Room2: 25 },
+            { name: 'xxx', Room1: 35, Room2: 25 },
+            { name: 'xxx', Room1: 34, Room2: 25 },
+            { name: 'xxx', Room1: 31, Room2: 25 },
+            { name: 'xxx', Room1: 32, Room2: 25 },
+            { name: 'xxx', Room1: 33, Room2: 25 },
+            { name: 'xxx', Room1: 30, Room2: 25 },
+            { name: 'xxx', Room1: 28, Room2: 25 },
         ];
         this.state = {
             data
@@ -65,22 +66,21 @@ class TemperatureLineChart extends Component {
 
     render() {
         return (
-            <Paper style={{ width: '600px', margin: '10px 10px 10px 20px' }}>
-                <h1>
-                    Temperature
-                </h1>
+            <Paper style={{ width: '600px', height: '330px', margin: '20px 20px 20px 20px', padding: '5px', paddingTop: '10px' }}>
+                <FormLabel component="legend">
+                    {this.props.title}
+                </FormLabel>
                 <LineChart width={600} height={300} data={this.state.data}
-                    style={{ marginLeft: '-30px', marginTop: '-20px' }}
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                    margin={{ top: 10, right: 30, left: -30, bottom: 5 }}>
                     <XAxis dataKey="name" />
                     <YAxis />
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" animationDuration={0} dataKey="Room1" stroke="#8884d8" activeDot={{ r: 8 }} />
-                    <Line type="monotone" animationDuration={0} dataKey="Room2" stroke="#0084d8" activeDot={{ r: 8 }} />
+                    <Line type="monotone" animationDuration={0} dataKey="Room1" name="Room 1" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Line type="monotone" animationDuration={0} dataKey="Room2" name="Room 2" stroke="#0084d8" activeDot={{ r: 8 }} />
                 </LineChart>
-            </Paper>
+            </Paper >
         );
     }
 }

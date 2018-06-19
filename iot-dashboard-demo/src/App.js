@@ -16,8 +16,8 @@ class App extends Component {
           <React.Fragment>
             <AppBar position="static" color="default" style={{ gridColumnStart: "sidebar-start", gridColumnEnd: "right" }}>
               <Toolbar>
-                <Typography variant="title" color="inherit">
-                  Title
+                <Typography variant="title" color="inherit" style={{marginTop: "-10px"}}>
+                  Smart Home Dashboard
                 </Typography>
               </Toolbar>
             </AppBar>
