@@ -77,8 +77,8 @@ class TemperatureLineChart extends Component {
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" animationDuration={0} dataKey="Room1" name="Room 1" stroke="#8884d8" activeDot={{ r: 8 }} />
-                    <Line type="monotone" animationDuration={0} dataKey="Room2" name="Room 2" stroke="#0084d8" activeDot={{ r: 8 }} />
+                    <Line type="monotone" dot={false} animationDuration={0} dataKey="Room1" name="Room 1" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Line type="monotone" dot={false} animationDuration={0} dataKey="Room2" name="Room 2" stroke="#0084d8" activeDot={{ r: 8 }} />
                 </LineChart>
             </Paper >
         );
