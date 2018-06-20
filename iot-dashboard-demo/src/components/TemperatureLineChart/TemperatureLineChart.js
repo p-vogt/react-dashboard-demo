@@ -11,7 +11,7 @@ class TemperatureLineChart extends Component {
         this.addData = this.addData.bind(this)
         const dataService = openSocket('http://localhost:5000/user');
 
-        dataService.on('new-data', (val) => this.addData(val));
+        dataService.on('new-data', (event) => this.addData(event.value));
 
         dataService.on('error', (error) => {
             console.log(error);
