@@ -6,7 +6,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
-
+import { dataStore } from '../stores'
 class OverviewPage extends Component {
 
     constructor(props) {
@@ -21,7 +21,7 @@ class OverviewPage extends Component {
     render() {
         return (
             <div style={{ display: 'flex' }}>
-                <TemperatureLineChart title={"Temperature"} />
+                <TemperatureLineChart dataStore={dataStore} title={"Temperature"} />
                 <Paper style={{ height: '100px', margin: '20px 20px 20px 0px', padding: '10px' }}>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">Lights</FormLabel>

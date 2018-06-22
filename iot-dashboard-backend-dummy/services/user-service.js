@@ -39,7 +39,8 @@ function updateUsers() {
 ///////////////////////////////////////////////////////////////////
 function newData() {
     const rnd = Math.round(Math.random() * 2) - 1;
-    userPublisher.publish('new-data', {name: "NewData", value: rnd});
+    const rnd2 = Math.round(Math.random() * 2) - 1;
+    userPublisher.publish('new-data', {name: "NewData", temp1: rnd, temp2: rnd2});
 }
 
 setInterval(newData, 300);

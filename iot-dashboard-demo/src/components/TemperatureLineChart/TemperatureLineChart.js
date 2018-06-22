@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { observer } from 'mobx-react';
 import openSocket from 'socket.io-client';
 import Paper from '@material-ui/core/Paper';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -11,57 +12,24 @@ class TemperatureLineChart extends Component {
         this.addData = this.addData.bind(this)
         const dataService = openSocket('http://localhost:5000/user');
 
-        dataService.on('new-data', (event) => this.addData(event.value));
+        dataService.on('new-data', (event) => this.addData(event.temp1, event.temp2));
 
         dataService.on('error', (error) => {
             console.log(error);
         });
-
-        let data = [
-            { name: 'xxx', Room1: 30, Room2: 25 },
-            { name: 'xxx', Room1: 31, Room2: 25 },
-            { name: 'xxx', Room1: 32, Room2: 25 },
-            { name: 'xxx', Room1: 33, Room2: 25 },
-            { name: 'xxx', Room1: 29, Room2: 25 },
-            { name: 'xxx', Room1: 28, Room2: 25 },
-            { name: 'xxx', Room1: 31, Room2: 25 },
-            { name: 'xxx', Room1: 33, Room2: 25 },
-            { name: 'xxx', Room1: 30, Room2: 25 },
-            { name: 'xxx', Room1: 35, Room2: 25 },
-            { name: 'xxx', Room1: 30, Room2: 25 },
-            { name: 'xxx', Room1: 34, Room2: 25 },
-            { name: 'xxx', Room1: 35, Room2: 25 },
-            { name: 'xxx', Room1: 32, Room2: 25 },
-            { name: 'xxx', Room1: 28, Room2: 25 },
-            { name: 'xxx', Room1: 27, Room2: 25 },
-            { name: 'xxx', Room1: 26, Room2: 25 },
-            { name: 'xxx', Room1: 25, Room2: 25 },
-            { name: 'xxx', Room1: 29, Room2: 25 },
-            { name: 'xxx', Room1: 30, Room2: 25 },
-            { name: 'xxx', Room1: 29, Room2: 25 },
-            { name: 'xxx', Room1: 35, Room2: 25 },
-            { name: 'xxx', Room1: 34, Room2: 25 },
-            { name: 'xxx', Room1: 31, Room2: 25 },
-            { name: 'xxx', Room1: 32, Room2: 25 },
-            { name: 'xxx', Room1: 33, Room2: 25 },
-            { name: 'xxx', Room1: 30, Room2: 25 },
-            { name: 'xxx', Room1: 28, Room2: 25 },
-        ];
-        this.state = {
-            data
-        }
     }
 
-    addData(val) {
-        let data = this.state.data.slice(0);
+    addData(temp1, temp2) {
+        let data = this.props.dataStore.data;
         if (data.length >= 30) {
             data = data.slice(1, 30);
         }
         data.push({
             name: new Date().toISOString().substring(11, 20),
-            Room1: data[data.length - 1].Room1 + val,
+            Room1: data[data.length - 1].Room1 + temp1,
+            Room2: data[data.length - 1].Room2 + temp2,
         });
-        this.setState({ data });
+        this.props.dataStore.setData(data);
     };
 
     render() {
@@ -70,7 +38,7 @@ class TemperatureLineChart extends Component {
                 <FormLabel component="legend">
                     {this.props.title}
                 </FormLabel>
-                <LineChart width={600} height={300} data={this.state.data}
+                <LineChart width={600} height={300} data={this.props.dataStore.data}
                     margin={{ top: 10, right: 30, left: -30, bottom: 5 }}>
                     <XAxis dataKey="name" />
                     <YAxis />
@@ -85,4 +53,4 @@ class TemperatureLineChart extends Component {
     }
 }
 
-export default TemperatureLineChart;
+export default observer(TemperatureLineChart);
