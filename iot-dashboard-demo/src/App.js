@@ -23,12 +23,12 @@ class App extends Component {
 
   }
   addData(temp1, temp2) {
-    console.log(temp1,temp2)
+    console.log(temp1, temp2)
     const data = dataStore.data;
     const newData = {
       name: new Date().toISOString().substring(11, 20),
-      temp1: data[data.length - 1].temp1 + temp1,
-      temp2: data[data.length - 1].temp2 + temp2,
+      temp1,
+      temp2
     };
     dataStore.addData(newData);
   };
