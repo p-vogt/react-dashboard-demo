@@ -38,14 +38,16 @@ class EventTable extends Component {
             <Table style={{ height: '100px' }}>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Ereignis</TableCell>
-                        <TableCell>Wert</TableCell>
+                        <TableCell>Time</TableCell>
+                        <TableCell>Event</TableCell>
+                        <TableCell>Value</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
                         return (
                             <TableRow key={n.id}>
+                              <TableCell>{n.timestamp}</TableCell>
                                 <TableCell component="th" scope="row">
                                     {n.name}
                                 </TableCell>

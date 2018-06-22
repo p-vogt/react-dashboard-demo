@@ -15,20 +15,18 @@ class App extends Component {
     const dataService = openSocket('http://localhost:5000/user');
     this.addData = this.addData.bind(this);
 
-    dataService.on('new-data', (event) => this.addData(event.temp1, event.temp2));
+    dataService.on('new-data', (event) => this.addData(event.name, event.temp1, event.temp2));
 
     dataService.on('error', (error) => {
       console.log(error);
     });
 
   }
-  addData(temp1, temp2) {
+  addData(name, temp1, temp2) {
     console.log(temp1, temp2)
-    const data = dataStore.data;
     const newData = {
-      name: new Date().toISOString().substring(11, 19),
-      temp1,
-      temp2
+      timestamp: new Date().toISOString().substring(11, 19),
+      name, temp1, temp2
     };
     dataStore.addData(newData);
   };

@@ -11,6 +11,7 @@ class DataStore {
             return {
                 id: id++,
                 name: sample.name,
+                timestamp: sample.timestamp,
                 temp: sample.temp1
             }
         });
