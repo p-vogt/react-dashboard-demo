@@ -26,7 +26,7 @@ class App extends Component {
     console.log(temp1, temp2)
     const data = dataStore.data;
     const newData = {
-      name: new Date().toISOString().substring(11, 20),
+      name: new Date().toISOString().substring(11, 19),
       temp1,
       temp2
     };
