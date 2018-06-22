@@ -1,46 +1,65 @@
-import { observable, decorate, action } from 'mobx';
+import { observable, decorate, action, computed } from 'mobx';
 
 class DataStore {
     data = tempInitData
-    setData(newData) {
-        this.data = newData;
+    addData(newData) {
+        this.data.push(newData);
+    }
+    get temp1() {
+        let id = 0;
+        return this.data.map(sample => {
+            return {
+                id: id++,
+                name: sample.name,
+                temp: sample.temp1
+            }
+        });
+    }
+    get chartData() {
+        let data = this.data;
+        if (data.length >= 30) {
+          data = data.slice(data.length - 30, data.length -1 );
+        }
+        return data;
     }
 }
 decorate(DataStore, {
     data: observable,
-    setData: action,
+    addData: action,
+    temp1: computed,
+    chartData: computed
 })
 
 
 const tempInitData = [
-            { name: 'xxx', Room1: 30, Room2: 25 },
-            { name: 'xxx', Room1: 31, Room2: 26 },
-            { name: 'xxx', Room1: 32, Room2: 28 },
-            { name: 'xxx', Room1: 33, Room2: 25 },
-            { name: 'xxx', Room1: 29, Room2: 27 },
-            { name: 'xxx', Room1: 28, Room2: 29 },
-            { name: 'xxx', Room1: 31, Room2: 30 },
-            { name: 'xxx', Room1: 33, Room2: 31 },
-            { name: 'xxx', Room1: 30, Room2: 32 },
-            { name: 'xxx', Room1: 35, Room2: 30 },
-            { name: 'xxx', Room1: 30, Room2: 33 },
-            { name: 'xxx', Room1: 34, Room2: 35 },
-            { name: 'xxx', Room1: 35, Room2: 30 },
-            { name: 'xxx', Room1: 32, Room2: 32 },
-            { name: 'xxx', Room1: 28, Room2: 29 },
-            { name: 'xxx', Room1: 27, Room2: 30 },
-            { name: 'xxx', Room1: 26, Room2: 31 },
-            { name: 'xxx', Room1: 25, Room2: 32 },
-            { name: 'xxx', Room1: 29, Room2: 33 },
-            { name: 'xxx', Room1: 30, Room2: 32 },
-            { name: 'xxx', Room1: 29, Room2: 31 },
-            { name: 'xxx', Room1: 35, Room2: 30 },
-            { name: 'xxx', Room1: 34, Room2: 29 },
-            { name: 'xxx', Room1: 31, Room2: 25 },
-            { name: 'xxx', Room1: 32, Room2: 24 },
-            { name: 'xxx', Room1: 33, Room2: 29 },
-            { name: 'xxx', Room1: 30, Room2: 30 },
-            { name: 'xxx', Room1: 28, Room2: 32 },
-        ];
+    { name: 'xxx', temp1: 30, temp2: 25 },
+    { name: 'xxx', temp1: 31, temp2: 26 },
+    { name: 'xxx', temp1: 32, temp2: 28 },
+    { name: 'xxx', temp1: 33, temp2: 25 },
+    { name: 'xxx', temp1: 29, temp2: 27 },
+    { name: 'xxx', temp1: 28, temp2: 29 },
+    { name: 'xxx', temp1: 31, temp2: 30 },
+    { name: 'xxx', temp1: 33, temp2: 31 },
+    { name: 'xxx', temp1: 30, temp2: 32 },
+    { name: 'xxx', temp1: 35, temp2: 30 },
+    { name: 'xxx', temp1: 30, temp2: 33 },
+    { name: 'xxx', temp1: 34, temp2: 35 },
+    { name: 'xxx', temp1: 35, temp2: 30 },
+    { name: 'xxx', temp1: 32, temp2: 32 },
+    { name: 'xxx', temp1: 28, temp2: 29 },
+    { name: 'xxx', temp1: 27, temp2: 30 },
+    { name: 'xxx', temp1: 26, temp2: 31 },
+    { name: 'xxx', temp1: 25, temp2: 32 },
+    { name: 'xxx', temp1: 29, temp2: 33 },
+    { name: 'xxx', temp1: 30, temp2: 32 },
+    { name: 'xxx', temp1: 29, temp2: 31 },
+    { name: 'xxx', temp1: 35, temp2: 30 },
+    { name: 'xxx', temp1: 34, temp2: 29 },
+    { name: 'xxx', temp1: 31, temp2: 25 },
+    { name: 'xxx', temp1: 32, temp2: 24 },
+    { name: 'xxx', temp1: 33, temp2: 29 },
+    { name: 'xxx', temp1: 30, temp2: 30 },
+    { name: 'xxx', temp1: 28, temp2: 32 },
+];
 
 export const dataStore = new DataStore();

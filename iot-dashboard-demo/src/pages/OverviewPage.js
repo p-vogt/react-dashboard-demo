@@ -12,7 +12,8 @@ class OverviewPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            ledRoom1: true,
+            ledRoom2: false
         }
     }
     handleChange() {

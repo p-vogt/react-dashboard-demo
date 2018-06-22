@@ -5,9 +5,33 @@ import Typography from '@material-ui/core/Typography';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { OverviewPage, Room1Page, Room2Page } from './pages';
 import { Sidebar } from './components';
+import { dataStore } from './stores'
+import openSocket from 'socket.io-client';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    const dataService = openSocket('http://localhost:5000/user');
+    this.addData = this.addData.bind(this);
+
+    dataService.on('new-data', (event) => this.addData(event.temp1, event.temp2));
+
+    dataService.on('error', (error) => {
+      console.log(error);
+    });
+
+  }
+  addData(temp1, temp2) {
+    console.log(temp1,temp2)
+    const data = dataStore.data;
+    const newData = {
+      name: new Date().toISOString().substring(11, 20),
+      temp1: data[data.length - 1].temp1 + temp1,
+      temp2: data[data.length - 1].temp2 + temp2,
+    };
+    dataStore.addData(newData);
+  };
 
   render() {
     return (
@@ -16,7 +40,7 @@ class App extends Component {
           <React.Fragment>
             <AppBar position="static" color="default" style={{ gridColumnStart: "sidebar-start", gridColumnEnd: "right" }}>
               <Toolbar>
-                <Typography variant="title" color="inherit" style={{marginTop: "-10px"}}>
+                <Typography variant="title" color="inherit" style={{ marginTop: "-10px" }}>
                   Smart Home Dashboard
                 </Typography>
               </Toolbar>
