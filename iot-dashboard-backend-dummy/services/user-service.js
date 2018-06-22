@@ -37,10 +37,13 @@ function updateUsers() {
 }
 
 ///////////////////////////////////////////////////////////////////
+let lastValTemp1 = 25;
+let lastValTemp2 = 20;
+
 function newData() {
-    const rnd = Math.round(Math.random() * 2) - 1;
-    const rnd2 = Math.round(Math.random() * 2) - 1;
-    userPublisher.publish('new-data', {name: "NewData", temp1: rnd, temp2: rnd2});
+    lastValTemp1 = lastValTemp1 + Math.round(Math.random() * 2) - 1;
+    lastValTemp2 = lastValTemp2 + Math.round(Math.random() * 2) - 1;
+    userPublisher.publish('new-data', {name: "NewData", temp1: lastValTemp1, temp2: lastValTemp2});
 }
 
 setInterval(newData, 300);
