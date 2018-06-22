@@ -15,7 +15,7 @@ class TemperatureLineChart extends Component {
                 </FormLabel>
                 <LineChart width={600} height={300} data={data}
                     margin={{ top: 10, right: 30, left: -30, bottom: 5 }}>
-                    <XAxis dataKey="name" />
+                    <XAxis dataKey="timestamp" />
                     <YAxis />
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />

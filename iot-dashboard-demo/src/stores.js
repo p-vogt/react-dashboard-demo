@@ -19,7 +19,7 @@ class DataStore {
     get chartData() {
         let data = this.data;
         if (data.length >= 30) {
-          data = data.slice(data.length - 30, data.length -1 );
+            data = data.slice(data.length - 30, data.length - 1);
         } else {
             data = data.slice(0, data.length)
         }
