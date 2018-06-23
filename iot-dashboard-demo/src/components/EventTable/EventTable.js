@@ -28,7 +28,7 @@ class EventTable extends Component {
 
     render() {
         const { rowsPerPage, page } = this.state;
-        const events = this.props.dataStore.eventDataRoom1.slice().reverse();
+        const events = this.props.dataStore.slice().reverse();
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, events.length - page * rowsPerPage);
 
         if (!events) {
@@ -47,7 +47,7 @@ class EventTable extends Component {
                     {events.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(event => {
                         return (
                             <TableRow key={event.id}>
-                                <TableCell>{event.timestamp}</TableCell>
+                                <TableCell>{new Date(Date.parse(event.timestamp)).toLocaleTimeString()}</TableCell>
                                 <TableCell component="th" scope="row">
                                     {event.name}
                                 </TableCell>

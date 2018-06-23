@@ -8,7 +8,7 @@ class Room1Page extends Component {
 
         return (
             <div>
-                <EventTable dataStore={dataStore} />
+                <EventTable dataStore={dataStore.eventDataRoom1} />
             </div>
         );
     }
