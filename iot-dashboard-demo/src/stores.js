@@ -25,12 +25,31 @@ class DataStore {
         }
         return data;
     }
+
+    ///////////////////////////////////////////////////////////////////////////////
+
+    led1Status = false;
+    led2Status = false;
+
+    setLed1Status(newStatus) {
+        this.led1Status = newStatus;
+    }
+
+    setLed2Status(newStatus) {
+        this.led2Status = newStatus;
+    }
+
 }
 decorate(DataStore, {
     data: observable,
     addData: action,
     temp1: computed,
-    chartData: computed
+    chartData: computed,
+    ////////////////////
+    led1Status: observable,
+    led2Status: observable,
+    setLed1Status: action,
+    setLed2Status: action,
 })
 
 export const dataStore = new DataStore();

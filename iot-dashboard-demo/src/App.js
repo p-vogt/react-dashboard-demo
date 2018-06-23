@@ -16,11 +16,19 @@ class App extends Component {
     this.addData = this.addData.bind(this);
 
     dataService.on('new-data', (event) => this.addData(event.name, event.temp1, event.temp2));
+    dataService.on('led1-changed', (event) => this.onLed1Changed(event.name, event.status));
+    dataService.on('led2-changed', (event) => this.onLed2Changed(event.name, event.status));
 
     dataService.on('error', (error) => {
       console.log(error);
     });
 
+  }
+  onLed1Changed(name, status) {
+    dataStore.setLed1Status(status);
+  }
+  onLed2Changed(name, status) {
+    dataStore.setLed2Status(status);
   }
   addData(name, temp1, temp2) {
     console.log(temp1, temp2)
