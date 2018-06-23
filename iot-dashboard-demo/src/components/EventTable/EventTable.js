@@ -28,10 +28,10 @@ class EventTable extends Component {
 
     render() {
         const { rowsPerPage, page } = this.state;
-        const data = this.props.dataStore.temp1.reverse();
-        const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+        const events = this.props.dataStore.eventDataRoom1.slice().reverse();
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, events.length - page * rowsPerPage);
 
-        if (!data) {
+        if (!events) {
             return ("Fehler")
         }
         return (
@@ -44,14 +44,14 @@ class EventTable extends Component {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
+                    {events.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(event => {
                         return (
-                            <TableRow key={n.id}>
-                              <TableCell>{n.timestamp}</TableCell>
+                            <TableRow key={event.id}>
+                                <TableCell>{event.timestamp}</TableCell>
                                 <TableCell component="th" scope="row">
-                                    {n.name}
+                                    {event.name}
                                 </TableCell>
-                                <TableCell>{n.temp}</TableCell>
+                                <TableCell>{event.stringValue}</TableCell>
                             </TableRow>
                         );
                     })}
@@ -65,7 +65,7 @@ class EventTable extends Component {
                     <TableRow>
                         <TablePagination
                             colSpan={2}
-                            count={data.length}
+                            count={events.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             onChangePage={this.handleChangePage}

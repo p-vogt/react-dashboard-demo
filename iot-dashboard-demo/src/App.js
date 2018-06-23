@@ -13,32 +13,18 @@ class App extends Component {
   constructor(props) {
     super(props);
     const dataService = openSocket('http://localhost:5000/user');
-    this.addData = this.addData.bind(this);
 
-    dataService.on('new-data', (event) => this.addData(event.name, event.temp1, event.temp2));
-    dataService.on('led1-changed', (event) => this.onLed1Changed(event.name, event.status));
-    dataService.on('led2-changed', (event) => this.onLed2Changed(event.name, event.status));
+    dataService.on('temp1-data', (event) => dataStore.handleEvent('temp1-data', event));
+    dataService.on('temp2-data', (event) => dataStore.handleEvent('temp2-data', event));
+    dataService.on('led1-changed', (event) => dataStore.handleEvent('led1-changed', event));
+    dataService.on('led2-changed', (event) => dataStore.handleEvent('led2-changed', event));
 
     dataService.on('error', (error) => {
       console.log(error);
     });
 
   }
-  onLed1Changed(name, status) {
-    dataStore.setLed1Status(status);
-  }
-  onLed2Changed(name, status) {
-    dataStore.setLed2Status(status);
-  }
-  addData(name, temp1, temp2) {
-    console.log(temp1, temp2)
-    const newData = {
-      timestamp: new Date().toISOString().substring(11, 19),
-      name, temp1, temp2
-    };
-    dataStore.addData(newData);
-  };
-
+  
   render() {
     return (
       <div className="App">
