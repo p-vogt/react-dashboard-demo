@@ -10,8 +10,12 @@ import Switch from '@material-ui/core/Switch';
 
 class LedStatus extends Component {
 
-    handleChange() {
-
+    handleClick = (id, event) => {
+        if(id === 1) {
+            this.props.dataStore.setLed1Status(!this.props.dataStore.led1Status)
+        } else if(id === 2) {
+            this.props.dataStore.setLed2Status(!this.props.dataStore.led2Status)
+        }
     }
     render() {
         const { led1Status, led2Status } = this.props.dataStore;
@@ -26,7 +30,7 @@ class LedStatus extends Component {
                                 control={
                                     <Switch
                                         checked={led1Status}
-                                        onChange={this.handleChange(1)}
+                                        onClick={(event) => this.handleClick(1, event)}
                                         value="ledRoom1"
                                     />
                                 }
@@ -39,7 +43,7 @@ class LedStatus extends Component {
                                 control={
                                     <Switch
                                         checked={led2Status}
-                                        onChange={this.handleChange(2)}
+                                        onClick={(event) => this.handleClick(2, event)}
                                         value="ledRoom2"
                                     />
                                 }

@@ -31,6 +31,15 @@ class DataStore {
     led1Status = false;
     led2Status = false;
 
+    setLed1Status(value) {
+        this.led1Status = value;
+        console.log("Setting light 1 to", value)
+    }
+    setLed2Status(value) {
+        this.led2Status = value;
+        console.log("Setting light 2 to", value)
+    }
+
     handleEvent(type, event) {
         switch (type) {
             case "led1-changed":
