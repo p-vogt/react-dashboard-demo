@@ -42,14 +42,20 @@ let lastValTemp2 = 20;
 let led1Status = true;
 let led2Status = true;
 
+// just for tests --> hysteresis
+let oldTriggerTemp1 = 0; 
+let oldTriggerTemp2 = 0;
+
 function newData() {
     lastValTemp1 = lastValTemp1 + Math.round(Math.random() * 2) - 1;
     lastValTemp2 = lastValTemp2 + Math.round(Math.random() * 2) - 1;
-    if (lastValTemp1 % 5 === 0) {
+    if (lastValTemp1 % 10 === 0 && lastValTemp1 !== oldTriggerTemp1) {
+        oldTriggerTemp1 = lastValTemp1;
         led1Status = !led1Status;
         sendLed1Status();
     }
-    if (lastValTemp2 % 5 === 0) {
+    if (lastValTemp2 % 10 === 0 && lastValTemp2 !== oldTriggerTemp2) {
+        oldTriggerTemp2 = lastValTemp2;
         led2Status = !led2Status;
         sendLed2Status();
     }
@@ -62,10 +68,10 @@ setInterval(newData, 300);
 
 
 function sendLed1Status() {
-    userPublisher.publish('led1-changed', { name: "LED status", value: led1Status, timestamp: new Date() });
+    userPublisher.publish('led1-changed', { name: "Light status changed", value: led1Status, timestamp: new Date() });
 }
 function sendLed2Status() {
-    userPublisher.publish('led2-changed', { name: "LED status", value: led2Status, timestamp: new Date() });
+    userPublisher.publish('led2-changed', { name: "Light status changed", value: led2Status, timestamp: new Date() });
 }
 
 setInterval(newData, 300);
