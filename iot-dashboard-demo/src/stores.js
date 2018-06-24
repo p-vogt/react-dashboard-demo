@@ -40,7 +40,9 @@ class DataStore {
         console.log("Setting light 2 to", value)
     }
 
+    eventId = 0;
     handleEvent(type, event) {
+        event.id = this.eventId++;
         switch (type) {
             case "led1-changed":
                 event.stringValue = event.value ? "On" : "Off";
