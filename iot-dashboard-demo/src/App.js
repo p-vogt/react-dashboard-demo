@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { OverviewPage, Room1Page, Room2Page } from './pages';
-import { Sidebar } from './components';
+import { Sidebar, NotificationBar } from './components';
 import { dataStore } from './stores'
 import openSocket from 'socket.io-client';
 import './App.css';
@@ -16,20 +16,36 @@ class App extends Component {
 
     dataService.on('temp1-data', (event) => dataStore.handleEvent('temp1-data', event));
     dataService.on('temp2-data', (event) => dataStore.handleEvent('temp2-data', event));
-    dataService.on('led1-changed', (event) => dataStore.handleEvent('led1-changed', event));
+    dataService.on('led1-changed', (event) => this.onNewEvent('led1-changed', event));
     dataService.on('led2-changed', (event) => dataStore.handleEvent('led2-changed', event));
 
     dataService.on('error', (error) => {
       console.log(error);
     });
-
+    this.state = { 
+      showNotificationBar: false,
+      notificationText: ""
+    };
+    this.onNewEvent = this.onNewEvent.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
-  
+
+  onNewEvent(name, event) {
+    dataStore.handleEvent(name, event)
+    this.setState({
+      showNotificationBar: true,
+      notificationText: event.name + " changed!"
+    })
+  }
+  handleClose() {
+    this.setState({showNotificationBar: false})
+  }
   render() {
     return (
       <div className="App">
         <BrowserRouter style={{ gridColumnStart: "sidebar-end", gridRowStart: "appbar-end", gridRowEnd: "bottom" }}>
           <React.Fragment>
+            <NotificationBar open={this.state.showNotificationBar} text = {this.state.notificationText} handleClose={this.handleClose} />
             <AppBar position="static" color="default" style={{ gridColumnStart: "sidebar-start", gridColumnEnd: "right" }}>
               <Toolbar>
                 <Typography variant="title" color="inherit" style={{ marginTop: "-10px" }}>
