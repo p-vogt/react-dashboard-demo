@@ -7,7 +7,26 @@ class DataStore {
 
     temp1Data = [];
     temp2Data = [];
-    get temperatureData() {
+    getAvg = (data) => data.reduce((sum, newVal) => sum + newVal.value, 0) / data.length;
+
+    get meanTemperature1() {
+        if(this.temp1Data.length < 1) return 0;
+        return this.getAvg(this.temp1Data);
+    }
+    get meanTemperature2() {
+        if(this.temp2Data.length < 1) return 0;
+        return this.getAvg(this.temp2Data);
+    }
+    get meanLastTemperature1() {
+        if(this.temp1Data.length < 1) return 0;
+        if(this.temp1Data.length < 30) return this.getAvg(this.temp1Data);
+        return this.getAvg(this.temp1Data.slice(this.temp1Data.length - 30, this.temp1Data.length - 1));
+    }
+    get meanLastTemperature2() {
+        if(this.temp2Data.length < 1) return 0;
+        return this.getAvg(this.temp2Data.slice(this.temp2Data.length - 30, this.temp2Data.length - 1));
+    }
+    get lastTemperatureData() {
         let { temp1Data, temp2Data } = this;
         let tempData1 = [];
         let tempData2 = [];
@@ -58,11 +77,17 @@ class DataStore {
                 event.stringValue = event.value
                 this.eventDataRoom1.push(event);
                 this.temp1Data.push(event)
+                if (this.temp1Data.length >= 500) {
+                    this.temp1Data = this.temp1Data.slice(this.temp1Data.length - 200, this.temp1Data.length - 1);
+                }
                 break;
             case "temp2-data":
                 event.stringValue = event.value
                 this.eventDataRoom2.push(event);
                 this.temp2Data.push(event)
+                if (this.temp2Data.length >= 500) {
+                    this.temp2Data = this.temp2Data.slice(this.temp2Data.length - 200, this.temp2Data.length - 1);
+                }
                 break;
 
             default:
@@ -73,7 +98,11 @@ class DataStore {
 decorate(DataStore, {
     temp1Data: observable,
     temp2Data: observable,
-    temperatureData: computed,
+    lastTemperatureData: computed,
+    meanTemperature1: computed,
+    meanTemperature2: computed,
+    meanLastTemperature1: computed,
+    meanLastTemperature2: computed,
     ////////////////////
     led1Status: observable,
     led2Status: observable,
