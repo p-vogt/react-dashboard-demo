@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LineChart, Line, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { observer } from 'mobx-react';
 import Paper from '@material-ui/core/Paper';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -19,8 +19,7 @@ class TemperatureLineChart extends Component {
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dot={false} animationDuration={0} dataKey="value" name="Room 1" stroke="#8884d8" activeDot={{ r: 8 }} />
-                    <Line type="monotone" dot={false} animationDuration={0} dataKey="value2" name="Room 2" stroke="#0084d8" activeDot={{ r: 8 }} />
+                    {this.props.children}
                 </LineChart>
             </Paper >
         );

@@ -21,26 +21,33 @@ class LedStatus extends Component {
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Lights</FormLabel>
                     <FormGroup>
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={led1Status}
-                                    onChange={this.handleChange(1)}
-                                    value="ledRoom1"
-                                />
-                            }
-                            label="Room 1"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={led2Status}
-                                    onChange={this.handleChange(2)}
-                                    value="ledRoom2"
-                                />
-                            }
-                            label="Room 2"
-                        />
+                        {this.props.showLedRoom1 ?
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={led1Status}
+                                        onChange={this.handleChange(1)}
+                                        value="ledRoom1"
+                                    />
+                                }
+                                label="Room 1"
+                            />
+                            : null
+                        }
+                        {this.props.showLedRoom2 ?
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={led2Status}
+                                        onChange={this.handleChange(2)}
+                                        value="ledRoom2"
+                                    />
+                                }
+                                label="Room 2"
+                            />
+                            : null
+                        }
+
                     </FormGroup>
                 </FormControl>
             </Paper>

@@ -34,7 +34,7 @@ class App extends Component {
     dataStore.handleEvent(name, event)
     this.setState({
       showNotificationBar: true,
-      notificationText: event.name + " changed!"
+      notificationText: event.name
     })
   }
   handleClose() {
