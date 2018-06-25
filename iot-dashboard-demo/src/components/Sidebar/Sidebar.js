@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 
 class Sidebar extends Component {
+    
     render() {
         return (
             <List component="nav" style={{ gridColumnStart: "sidebar-start", background: "rgba(46, 46, 46, 0.836)" }}>

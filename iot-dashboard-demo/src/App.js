@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { OverviewPage, Room1Page, Room2Page } from './pages';
 import { Sidebar, NotificationBar } from './components';
-import { dataStore } from './stores'
+import { dataStore, appDataStore } from './stores'
+import { observer } from 'mobx-react'
 import openSocket from 'socket.io-client';
 import './App.css';
 
@@ -22,7 +23,7 @@ class App extends Component {
     dataService.on('error', (error) => {
       console.log(error);
     });
-    this.state = { 
+    this.state = {
       showNotificationBar: false,
       notificationText: ""
     };
@@ -38,18 +39,18 @@ class App extends Component {
     })
   }
   handleClose() {
-    this.setState({showNotificationBar: false})
+    this.setState({ showNotificationBar: false })
   }
   render() {
     return (
       <div className="App">
         <BrowserRouter style={{ gridColumnStart: "sidebar-end", gridRowStart: "appbar-end", gridRowEnd: "bottom" }}>
           <React.Fragment>
-            <NotificationBar open={this.state.showNotificationBar} text = {this.state.notificationText} handleClose={this.handleClose} />
+            <NotificationBar open={this.state.showNotificationBar} text={this.state.notificationText} handleClose={this.handleClose} />
             <AppBar position="static" color="default" style={{ gridColumnStart: "sidebar-start", gridColumnEnd: "right" }}>
               <Toolbar>
                 <Typography variant="title" color="inherit" style={{ marginTop: "-10px" }}>
-                  Smart Home Dashboard
+                  {appDataStore.pageTitle}
                 </Typography>
               </Toolbar>
             </AppBar>
@@ -66,4 +67,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default observer(App);

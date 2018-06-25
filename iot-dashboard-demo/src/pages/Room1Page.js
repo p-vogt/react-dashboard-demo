@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { TemperatureLineChart, EventTable, LedStatus } from '../components'
-import { dataStore } from '../stores'
+import { dataStore, appDataStore } from '../stores'
 import { Line, ReferenceLine } from 'recharts';
 import { observer } from 'mobx-react';
 
 class Room1Page extends Component {
+
+    componentDidMount = () => {
+        appDataStore.setPageTitle("Room 1")
+    }
 
     render() {
         const meanTemp1 = dataStore.meanTemperature1;
@@ -18,7 +22,7 @@ class Room1Page extends Component {
                     </TemperatureLineChart>
                     <LedStatus dataStore={dataStore} showLedRoom1 />
                 </div>
-                <EventTable dataStore={dataStore.eventDataRoom1} />
+                <EventTable dataStore={dataStore.eventsRoom1} />
             </div>
         );
     }

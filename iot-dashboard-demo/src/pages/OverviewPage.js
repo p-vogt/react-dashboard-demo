@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { TemperatureLineChart, LedStatus } from '../components'
-import { dataStore } from '../stores'
+import { dataStore, appDataStore } from '../stores'
 import { Line, ReferenceLine } from 'recharts';
 import { observer } from 'mobx-react';
 
 class OverviewPage extends Component {
+
+    componentDidMount = () => {
+        appDataStore.setPageTitle("Overview")
+    }
 
     render() {
 
