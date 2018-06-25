@@ -49,12 +49,12 @@ let oldTriggerTemp2 = 0;
 function newData() {
     lastValTemp1 = lastValTemp1 + Math.round(Math.random() * 2) - 1;
     lastValTemp2 = lastValTemp2 + Math.round(Math.random() * 2) - 1;
-    if (lastValTemp1 % 10 === 0 && lastValTemp1 !== oldTriggerTemp1) {
+    if (lastValTemp1 % 5 === 0 && lastValTemp1 !== oldTriggerTemp1) {
         oldTriggerTemp1 = lastValTemp1;
         led1Status = !led1Status;
         sendLed1Status();
     }
-    if (lastValTemp2 % 10 === 0 && lastValTemp2 !== oldTriggerTemp2) {
+    if (lastValTemp2 % 5 === 0 && lastValTemp2 !== oldTriggerTemp2) {
         oldTriggerTemp2 = lastValTemp2;
         led2Status = !led2Status;
         sendLed2Status();
@@ -63,8 +63,6 @@ function newData() {
     userPublisher.publish('temp2-data', { description: "Temperature", value: lastValTemp2, timestamp: new Date() });
 }
 
-setInterval(newData, 300);
-
 function sendLed1Status() {
     userPublisher.publish('led1-changed', { description: "Light status changed", value: led1Status, timestamp: new Date() });
 }
@@ -72,4 +70,4 @@ function sendLed2Status() {
     userPublisher.publish('led2-changed', { description: "Light status changed", value: led2Status, timestamp: new Date() });
 }
 
-setInterval(newData, 300);
+setInterval(newData, 1000);
