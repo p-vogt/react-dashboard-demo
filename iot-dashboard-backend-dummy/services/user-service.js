@@ -59,19 +59,17 @@ function newData() {
         led2Status = !led2Status;
         sendLed2Status();
     }
-    userPublisher.publish('temp1-data', { name: "Temperature", value: lastValTemp1, timestamp: new Date() });
-    userPublisher.publish('temp2-data', { name: "Temperature", value: lastValTemp2, timestamp: new Date() });
+    userPublisher.publish('temp1-data', { description: "Temperature", value: lastValTemp1, timestamp: new Date() });
+    userPublisher.publish('temp2-data', { description: "Temperature", value: lastValTemp2, timestamp: new Date() });
 }
 
 setInterval(newData, 300);
 
-
-
 function sendLed1Status() {
-    userPublisher.publish('led1-changed', { name: "Light status changed", value: led1Status, timestamp: new Date() });
+    userPublisher.publish('led1-changed', { description: "Light status changed", value: led1Status, timestamp: new Date() });
 }
 function sendLed2Status() {
-    userPublisher.publish('led2-changed', { name: "Light status changed", value: led2Status, timestamp: new Date() });
+    userPublisher.publish('led2-changed', { description: "Light status changed", value: led2Status, timestamp: new Date() });
 }
 
 setInterval(newData, 300);

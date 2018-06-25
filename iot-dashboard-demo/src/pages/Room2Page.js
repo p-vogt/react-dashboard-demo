@@ -7,7 +7,7 @@ import { observer } from 'mobx-react';
 class Room2Page extends Component {
 
     render() {
-        const meanTemp2 = dataStore.temp2Data;
+        const meanTemp2 = dataStore.meanTemperature2;
         const data = dataStore.temp2Data.slice();
         return (
             <div>

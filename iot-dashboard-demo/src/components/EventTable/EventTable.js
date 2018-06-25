@@ -49,7 +49,7 @@ class EventTable extends Component {
                             <TableRow key={event.id}>
                                 <TableCell>{new Date(Date.parse(event.timestamp)).toLocaleTimeString()}</TableCell>
                                 <TableCell component="th" scope="row">
-                                    {event.name}
+                                    {event.description}
                                 </TableCell>
                                 <TableCell>{event.stringValue}</TableCell>
                             </TableRow>
