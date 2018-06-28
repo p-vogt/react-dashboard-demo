@@ -27,7 +27,7 @@ class OverviewPage extends Component {
                     <SensorValue value={meanTemp1.toFixed(1)} title={"Mean Temp Room 1"} unit="°C" />
                     <SensorValue value={meanTemp2.toFixed(1)} title={"Mean Temp Room 2"} unit="°C" />
                     <SensorValue value={dataStore.humidity} title={"Humidity"} unit="%" />
-                    <SensorValue value={dataStore.brightness} title={"Brightness"} unit="Lux" />
+                    <SensorValue value={dataStore.brightness} title={"Brightness"} unit="lx" />
                 </div>
             </div>
 
