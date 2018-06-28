@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - "stable"
+branches:
+  only:
+    - master
+cache:
+  directories:
+  - node_modules
+before_script:
+  - cd iot-dashboard-demo
+script:
+  - npm install
+  - npm run test
+  - npm run build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: iot-dashboard-demo/build
+  on:
+    branch: master
