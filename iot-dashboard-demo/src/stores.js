@@ -115,6 +115,9 @@ class DataStore {
             case "brightness-data":
                 this.setBrightness(event.value);
                 break;
+            case "alarm":
+                
+                break;
             default:
                 throw new Error("Invalid event type: ", type);
         }

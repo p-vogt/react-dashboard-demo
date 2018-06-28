@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { HOME_PATH, MICROSERVICE_URL, MICROSERVICE_PORT, MICROSERVICE_WS_NAMESPACE } from './constants'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -8,28 +9,30 @@ import { Sidebar, NotificationBar } from './components';
 import { dataStore, appDataStore } from './stores'
 import { observer } from 'mobx-react'
 import openSocket from 'socket.io-client';
-import { HOME_PATH } from './constants'
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    const dataService = openSocket('http://localhost:5000/user');
+    const dataService = openSocket(MICROSERVICE_URL + ':' + MICROSERVICE_PORT + '/' + MICROSERVICE_WS_NAMESPACE);
 
     dataService.on('temp1-data', (event) => dataStore.handleEvent('temp1-data', event));
     dataService.on('temp2-data', (event) => dataStore.handleEvent('temp2-data', event));
     dataService.on('humidity-data', (event) => dataStore.handleEvent('humidity-data', event));
     dataService.on('brightness-data', (event) => dataStore.handleEvent('brightness-data', event));
     dataService.on('led1-changed', (event) => this.onNewEvent('led1-changed', event));
-    dataService.on('led2-changed', (event) => dataStore.handleEvent('led2-changed', event));
+    dataService.on('led2-changed', (event) => this.onNewEvent('led2-changed', event));
+    dataService.on('alarm', (event) => this.onNewEvent('alarm', event));
 
     dataService.on('error', (error) => {
       console.log(error);
     });
+
     this.state = {
       showNotificationBar: false,
       notificationText: ""
     };
+
     this.onNewEvent = this.onNewEvent.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }

@@ -59,9 +59,9 @@ function newData() {
         led2Status = !led2Status;
         sendLed2Status();
     }
-    userPublisher.publish('temp1-data', { description: "Temperature", value: lastValTemp1, timestamp: new Date() });
-    userPublisher.publish('temp2-data', { description: "Temperature", value: lastValTemp2, timestamp: new Date() });
-    userPublisher.publish('humidity-data', { description: "Humidity", value: lastValTemp1, timestamp: new Date() });
+    userPublisher.publish('temp1-data'     , { description: "Temperature", value: lastValTemp1, timestamp: new Date() });
+    userPublisher.publish('temp2-data'     , { description: "Temperature", value: lastValTemp2, timestamp: new Date() });
+    userPublisher.publish('humidity-data'  , { description: "Humidity", value: lastValTemp1, timestamp: new Date() });
     userPublisher.publish('brightness-data', { description: "Brightness", value: lastValTemp2 * 10, timestamp: new Date() });
 }
 
