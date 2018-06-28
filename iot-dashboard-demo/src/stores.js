@@ -1,4 +1,5 @@
 import { observable, decorate, action, computed } from 'mobx';
+import { MICROSERVICE_URL } from './constants'
 
 const NUMBER_OF_LAST_VALUES = 30;
 
@@ -14,7 +15,6 @@ decorate(AppDataStore, {
 })
 
 class DataStore {
-
     // All events of room 1/2
     eventsRoom1 = [];
     eventsRoom2 = [];
@@ -67,23 +67,52 @@ class DataStore {
 
     setLed1Status(value) {
         this.led1Status = value;
-        console.log("Setting light 1 to", value)
+        fetch(MICROSERVICE_URL + "/led1",
+            {
+                method: 'post',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ value })
+            })
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
     }
     setLed2Status(value) {
         this.led2Status = value;
-        console.log("Setting light 2 to", value)
+        fetch(MICROSERVICE_URL + "/led2",
+            {
+                method: 'post',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ value })
+            })
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
     setBrightness(value) {
         this.brightness = value;
-        console.log("Setting brightness 1 to", value)
     }
     setHumidity(value) {
         this.humidity = value;
-        console.log("Setting humidity 1 to", value)
     }
     eventId = 0;
     handleEvent(type, event) {
-        if(!event) {
+        if (!event) {
             console.error("handleEvent: received null as event!");
             return;
         }
@@ -120,7 +149,10 @@ class DataStore {
                 this.setBrightness(event.value);
                 break;
             case "alarm":
-                
+                console.log("ALARM", event)
+                break;
+            case "led1-debug":
+                console.log(event)
                 break;
             default:
                 throw new Error("Invalid event type: ", type);
