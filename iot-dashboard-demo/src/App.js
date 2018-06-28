@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HOME_PATH, MICROSERVICE_URL, MICROSERVICE_PORT, MICROSERVICE_WS_NAMESPACE } from './constants'
+import { HOME_PATH, MICROSERVICE_URL, MICROSERVICE_WS_NAMESPACE } from './constants'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -14,8 +14,7 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    const dataService = openSocket(MICROSERVICE_URL + ':' + MICROSERVICE_PORT + '/' + MICROSERVICE_WS_NAMESPACE);
-
+    const dataService = openSocket(MICROSERVICE_URL + '/' + MICROSERVICE_WS_NAMESPACE);
     dataService.on('temp1-data', (event) => dataStore.handleEvent('temp1-data', event));
     dataService.on('temp2-data', (event) => dataStore.handleEvent('temp2-data', event));
     dataService.on('humidity-data', (event) => dataStore.handleEvent('humidity-data', event));
@@ -23,7 +22,6 @@ class App extends Component {
     dataService.on('led1-changed', (event) => this.onNewEvent('led1-changed', event));
     dataService.on('led2-changed', (event) => this.onNewEvent('led2-changed', event));
     dataService.on('alarm', (event) => this.onNewEvent('alarm', event));
-
     dataService.on('error', (error) => {
       console.log(error);
     });
@@ -39,7 +37,7 @@ class App extends Component {
 
   onNewEvent(name, event) {
     if (!event) {
-      console.error("onNewEvent: received null as event!");
+      console.error("onNewEvent: received null as event!" , event);
       return;
     }
     dataStore.handleEvent(name, event)
