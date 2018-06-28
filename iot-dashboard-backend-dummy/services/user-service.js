@@ -10,7 +10,7 @@ var userResponder = new cote.Responder({
 var userPublisher = new cote.Publisher({
     name: 'user publisher',
     namespace: 'user',
-    broadcasts: ['update', 'temp1-data', 'temp2-data', 'led1-changed', 'led2-changed']
+    broadcasts: ['update', 'temp1-data', 'temp2-data', 'led1-changed', 'led2-changed', 'humidity-data', 'brightness-data']
 });
 
 userResponder.on('*', console.log);
@@ -43,7 +43,7 @@ let led1Status = true;
 let led2Status = true;
 
 // just for tests --> hysteresis
-let oldTriggerTemp1 = 0; 
+let oldTriggerTemp1 = 0;
 let oldTriggerTemp2 = 0;
 
 function newData() {
@@ -61,6 +61,8 @@ function newData() {
     }
     userPublisher.publish('temp1-data', { description: "Temperature", value: lastValTemp1, timestamp: new Date() });
     userPublisher.publish('temp2-data', { description: "Temperature", value: lastValTemp2, timestamp: new Date() });
+    userPublisher.publish('humidity-data', { description: "Humidity", value: lastValTemp1, timestamp: new Date() });
+    userPublisher.publish('brightness-data', { description: "Brightness", value: lastValTemp2 * 10, timestamp: new Date() });
 }
 
 function sendLed1Status() {
