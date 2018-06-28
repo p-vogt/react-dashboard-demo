@@ -17,6 +17,8 @@ class App extends Component {
 
     dataService.on('temp1-data', (event) => dataStore.handleEvent('temp1-data', event));
     dataService.on('temp2-data', (event) => dataStore.handleEvent('temp2-data', event));
+    dataService.on('humidity-data', (event) => dataStore.handleEvent('humidity-data', event));
+    dataService.on('brightness-data', (event) => dataStore.handleEvent('brightness-data', event));
     dataService.on('led1-changed', (event) => this.onNewEvent('led1-changed', event));
     dataService.on('led2-changed', (event) => dataStore.handleEvent('led2-changed', event));
 

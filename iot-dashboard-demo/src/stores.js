@@ -19,8 +19,8 @@ class DataStore {
     eventsRoom1 = [];
     eventsRoom2 = [];
 
-    humidity = 0;
-    brightness = 0;
+    humidity = "0";
+    brightness = "0";
     // temperature data of room 1/2
     temp1Data = [];
     temp2Data = [];
@@ -73,7 +73,14 @@ class DataStore {
         this.led2Status = value;
         console.log("Setting light 2 to", value)
     }
-
+    setBrightness(value) {
+        this.brightness = value;
+        console.log("Setting brightness 1 to", value)
+    }
+    setHumidity(value) {
+        this.humidity = value;
+        console.log("Setting humidity 1 to", value)
+    }
     eventId = 0;
     handleEvent(type, event) {
         event.id = this.eventId++;
@@ -102,7 +109,12 @@ class DataStore {
                     this.temp2Data = this.temp2Data.slice(this.temp2Data.length - 200, this.temp2Data.length - 1);
                 }
                 break;
-
+            case "humidity-data":
+                this.setHumidity(event.value);
+                break;
+            case "brightness-data":
+                this.setBrightness(event.value);
+                break;
             default:
                 throw new Error("Invalid event type: ", type);
         }
@@ -128,6 +140,8 @@ decorate(DataStore, {
     handleEvent: action,
     setLed1Status: action,
     setLed2Status: action,
+    setHumidity: action,
+    setBrightness: action,
 })
 
 export const appDataStore = new AppDataStore();
