@@ -4,25 +4,25 @@ import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import { withRouter } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';
-
+import { HOME_PATH } from '../../constants'
 
 class Sidebar extends Component {
     
     render() {
         return (
             <List component="nav" style={{ gridColumnStart: "sidebar-start", background: "rgba(46, 46, 46, 0.836)" }}>
-                <ListItem button onClick={() => this.props.history.push("/")}>
+                <ListItem button onClick={() => this.props.history.push(HOME_PATH + "/")}>
                     <Typography style={{ color: "white" }}>
                         Overview
             </Typography>
                 </ListItem>
                 <Divider />
-                <ListItem button divider onClick={() => this.props.history.push("/Room1")}>
+                <ListItem button divider onClick={() => this.props.history.push(HOME_PATH + "/Room1")}>
                     <Typography style={{ color: "white" }}>
                         Room 1
             </Typography>
                 </ListItem>
-                <ListItem button onClick={() => this.props.history.push("/Room2")}>
+                <ListItem button onClick={() => this.props.history.push(HOME_PATH + "/Room2")}>
                     <Typography style={{ color: "white" }}>
                         Room 2
             </Typography>

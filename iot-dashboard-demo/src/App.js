@@ -8,6 +8,7 @@ import { Sidebar, NotificationBar } from './components';
 import { dataStore, appDataStore } from './stores'
 import { observer } from 'mobx-react'
 import openSocket from 'socket.io-client';
+import { HOME_PATH } from './constants'
 import './App.css';
 
 class App extends Component {
@@ -58,9 +59,9 @@ class App extends Component {
             </AppBar>
             <Sidebar />
             <Switch exact>
-              <Route exact path={"/"} component={OverviewPage} />
-              <Route exact path={"/Room1"} component={Room1Page} />
-              <Route exact path={"/Room2"} component={Room2Page} />
+              <Route exact path={HOME_PATH + "/"} component={OverviewPage} />
+              <Route exact path={HOME_PATH + "/Room1"} component={Room1Page} />
+              <Route exact path={HOME_PATH + "/Room2"} component={Room2Page} />
             </Switch>
           </React.Fragment>
         </BrowserRouter>
