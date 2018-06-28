@@ -38,6 +38,10 @@ class App extends Component {
   }
 
   onNewEvent(name, event) {
+    if (!event) {
+      console.error("onNewEvent: received null as event!");
+      return;
+    }
     dataStore.handleEvent(name, event)
     this.setState({
       showNotificationBar: true,

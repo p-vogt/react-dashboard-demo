@@ -83,6 +83,10 @@ class DataStore {
     }
     eventId = 0;
     handleEvent(type, event) {
+        if(!event) {
+            console.error("handleEvent: received null as event!");
+            return;
+        }
         event.id = this.eventId++;
         switch (type) {
             case "led1-changed":
