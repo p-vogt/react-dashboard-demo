@@ -19,6 +19,8 @@ class DataStore {
     eventsRoom1 = [];
     eventsRoom2 = [];
 
+    humidity = 0;
+    brightness = 0;
     // temperature data of room 1/2
     temp1Data = [];
     temp2Data = [];
@@ -114,6 +116,8 @@ decorate(DataStore, {
     led2Status: observable,
     eventsRoom1: observable,
     eventsRoom2: observable,
+    humidity: observable,
+    brightness: observable,
     // computed
     lastTemperatureData: computed,
     meanTemperature1: computed,

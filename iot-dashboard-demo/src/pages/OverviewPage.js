@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TemperatureLineChart, LedStatus } from '../components'
+import { TemperatureLineChart, LedStatus, SensorValue } from '../components'
 import { dataStore, appDataStore } from '../stores'
 import { Line, ReferenceLine } from 'recharts';
 import { observer } from 'mobx-react';
@@ -22,10 +22,12 @@ class OverviewPage extends Component {
                     <Line type="monotone" dot={false} animationDuration={0} dataKey="value" name="Room 1" stroke="#8884d8" activeDot={{ r: 8 }} />
                     <Line type="monotone" dot={false} animationDuration={0} dataKey="value2" name="Room 2" stroke="#0084d8" activeDot={{ r: 8 }} />
                 </TemperatureLineChart>
-                <LedStatus dataStore={dataStore} showLedRoom1 showLedRoom2 />
-                <div style={{align: "left"}}>
-                    <p>Mean Room 1 Temp: {meanTemp1.toFixed(2)} °C </p>
-                    <p>Mean Room 2 Temp: {meanTemp2.toFixed(2)} °C </p>
+                <div style={{ height: "300px", display: "flex", flexWrap: "wrap" }}>
+                    <LedStatus dataStore={dataStore} showLedRoom1 showLedRoom2 />
+                    <SensorValue value={meanTemp1.toFixed(1)} title={"Mean Temp Room 1"} unit="°C" />
+                    <SensorValue value={meanTemp2.toFixed(1)} title={"Mean Temp Room 2"} unit="°C" />
+                    <SensorValue value={dataStore.humidity} title={"Humidity"} unit="%" />
+                    <SensorValue value={dataStore.brightness} title={"Brightness"} unit="Lux" />
                 </div>
             </div>
 
