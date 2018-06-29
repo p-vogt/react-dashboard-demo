@@ -13,7 +13,7 @@ class TemperatureLineChart extends Component {
                 </FormLabel>
                 <LineChart width={600} height={300} data={this.props.data}
                     margin={{ top: 10, right: 30, left: -30, bottom: 5 }}>
-                    <YAxis />
+                    <YAxis type="number" domain={[15, 35]} />
                     <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
                     <Legend />

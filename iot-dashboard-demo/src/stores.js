@@ -66,7 +66,6 @@ class DataStore {
     led2Status = false;
 
     setLed1Status(value) {
-        this.led1Status = value;
         fetch(MICROSERVICE_URL + "/led1",
             {
                 method: 'post',
@@ -77,7 +76,6 @@ class DataStore {
             })
             .then(response => response.json())
             .then(json => {
-                console.log(json);
             })
             .catch(error => {
                 console.error(error);
@@ -85,7 +83,6 @@ class DataStore {
 
     }
     setLed2Status(value) {
-        this.led2Status = value;
         fetch(MICROSERVICE_URL + "/led2",
             {
                 method: 'post',
@@ -96,10 +93,9 @@ class DataStore {
             })
             .then(response => response.json())
             .then(json => {
-                console.log(json);
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             })
     }
     setBrightness(value) {
@@ -115,6 +111,7 @@ class DataStore {
             return;
         }
         event.id = this.eventId++;
+        console.log(event)
         switch (type) {
             case "led1-changed":
                 event.stringValue = event.value ? "On" : "Off";
