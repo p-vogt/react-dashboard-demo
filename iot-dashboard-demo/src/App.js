@@ -22,9 +22,7 @@ class App extends Component {
     dataService.on('led1-changed', (event) => this.onNewEvent('led1-changed', event));
     dataService.on('led2-changed', (event) => this.onNewEvent('led2-changed', event));
     dataService.on('alarm', (event) => this.onNewEvent('alarm', event));
-    dataService.on('error', (error) => {
-      console.log(error);
-    });
+    dataService.on('error', (error) => console.error(error));
 
     this.state = {
       showNotificationBar: false,

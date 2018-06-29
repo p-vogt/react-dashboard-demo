@@ -14,6 +14,7 @@ class LedStatus extends Component {
         if(id === 1) {
             this.props.dataStore.setLed1Status(!this.props.dataStore.led1Status)
         } else if(id === 2) {
+            console.log(this.props.dataStore.led2Status)
             this.props.dataStore.setLed2Status(!this.props.dataStore.led2Status)
         }
     }
