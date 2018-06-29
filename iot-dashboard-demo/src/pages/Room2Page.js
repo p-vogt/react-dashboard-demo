@@ -23,7 +23,7 @@ class Room2Page extends Component {
                     <div style={{ height: "300px", display: "flex", flexWrap: "wrap" }}>
                         <LedStatus dataStore={dataStore} showLedRoom2 />
                         <SensorValue value={meanTemp2.toFixed(1)} title={"Mean Temp"}  unit="°C" />
-                        <SensorValue value={dataStore.brightness} title={"Brightness"} unit="lx" />
+                        <SensorValue value={dataStore.brightness.toFixed(1)} title={"Brightness"} unit="lx" />
                     </div>
                 </div>
                 <EventTable dataStore={dataStore.eventsRoom2} />

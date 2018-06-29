@@ -26,8 +26,8 @@ class OverviewPage extends Component {
                     <LedStatus dataStore={dataStore} showLedRoom1 showLedRoom2 />
                     <SensorValue value={meanTemp1.toFixed(1)} title={"Mean Temp Room 1"} unit="°C" />
                     <SensorValue value={meanTemp2.toFixed(1)} title={"Mean Temp Room 2"} unit="°C" />
-                    <SensorValue value={dataStore.humidity} title={"Humidity"} unit="%" />
-                    <SensorValue value={dataStore.brightness} title={"Brightness"} unit="lx" />
+                    <SensorValue value={Number(dataStore.humidity).toFixed(1)} title={"Humidity"} unit="%" />
+                    <SensorValue value={Number(dataStore.brightness).toFixed(1)} title={"Brightness"} unit="lx" />
                 </div>
             </div>
 

@@ -39,7 +39,7 @@ class App extends Component {
     
     led2Service.on('led2-changed', (event) => this.onNewEvent('led2-changed', event));
     led2Service.on('error', (error) => console.error("led2Service", error));
-    
+
     alarmService.on('alarm', (event) => this.onNewEvent('alarm', event));
     alarmService.on('error', (error) => console.error("alarmService", error));
  
