@@ -70,7 +70,6 @@ class DataStore {
         fetch(MICROSERVICE_URL + "/led1",
             {
                 method: 'post',
-                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -91,7 +90,6 @@ class DataStore {
         fetch(MICROSERVICE_URL + "/led2",
             {
                 method: 'post',
-                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json',
                 },
