@@ -85,7 +85,6 @@ class DataStore {
 
     }
     setLed2Status(value) {
-        console.log(this.led2Status)
         this.led2Status = value;
         fetch(MICROSERVICE_URL + "/led2",
             {
