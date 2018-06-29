@@ -143,7 +143,7 @@ class DataStore {
             case "brightness-data":
                 this.setBrightness(event.value);
                 break;
-            case "alarm":
+            case "alarm-data":
                 console.log("ALARM", event)
                 break;
             case "led1-debug":
