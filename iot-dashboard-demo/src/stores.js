@@ -58,8 +58,21 @@ class DataStore {
             tempData2 = temp2Data.slice(0, temp2Data.length);
         }
         let i = 0;
-        tempData1.forEach((sample) => sample.value2 = tempData2[i] ? tempData2[i++].value : undefined)
-        return tempData1;
+        if (tempData1.length > temp2Data.length) {
+            tempData1.forEach((sample) => {
+                sample.value2 = tempData2.length > i ? tempData2[i++].value : undefined
+            })
+
+            return tempData1;
+        } else {
+            tempData2.forEach((sample) => {
+                sample.value2 = tempData1.length > i ? tempData1[i++].value : undefined
+            })
+           
+            return tempData2;
+        }
+
+
     }
 
     led1Status = false;
