@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { HOME_PATH, MICROSERVICE_URL } from './constants'
+import { HOME_PATH, MICROSERVICE_URL } from './constants';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { OverviewPage, Room1Page, Room2Page } from './pages';
 import { Sidebar, NotificationBar } from './components';
-import { dataStore, appDataStore } from './stores'
-import { observer } from 'mobx-react'
+import { dataStore, appDataStore } from './stores';
+import { observer } from 'mobx-react';
 import openSocket from 'socket.io-client';
 import './App.css';
 
